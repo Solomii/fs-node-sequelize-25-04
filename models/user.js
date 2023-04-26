@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const {isAfter} = require('date-fns')
+const { isAfter } = require('date-fns');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**
@@ -16,21 +16,21 @@ module.exports = (sequelize, DataTypes) => {
         {
             firstName: {
                 type: DataTypes.STRING,
-                field: "first_name",
+                field:'first_name',
                 allowNull: false,
                 validate: {
                     notNull: true,
-                    notEmpty: true,
-                },
+                    notEmpty: true
+                }
             },
             lastName: {
                 type: DataTypes.STRING,
-                field: "last_name",
+                field:'last_name',
                 allowNull: false,
                 validate: {
                     notNull: true,
-                    notEmpty: true,
-                },
+                    notEmpty: true
+                }
             },
             email: {
                 type: DataTypes.STRING,
@@ -39,47 +39,45 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     notNull: true,
                     notEmpty: true,
-                    isEmail: true,
+                    isEmail: true
                 },
             },
             password: {
                 type: DataTypes.TEXT,
-                field: "password_hash",
+                field:'password_hash',
                 allowNull: false,
                 validate: {
                     notNull: true,
-                    notEmpty: true,
-                },
+                    notEmpty: true
+                }
             },
             birthday: {
                 type: DataTypes.DATEONLY,
                 allowNull: false,
                 validate: {
-                    notNull: true,
-                    notEmpty: true,
                     isDate: true,
                     isValidDate(value){
                       if(isAfter(new Date(value), new Date())){
-                        throw new Error("check birthday")
+                        throw new Error('check birthday');
                       }
                     }
                 },
             },
             isMale: {
                 type: DataTypes.BOOLEAN,
-                field: "is_male",
+                field: 'is_male',
                 allowNull: false,
                 validate: {
                     notNull: true,
-                    notEmpty: true,
-                },
-            },
+                    notEmpty: true
+                }
+            }
         },
         {
             sequelize,
-            modelName: "User",
-            tableName:"users",
-            underscored:true,
+            modelName: 'User',
+            tableName:'users',
+            underscored:true
         }
     );
     return User;
