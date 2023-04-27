@@ -41,10 +41,14 @@ module.exports = {
         type: Sequelize.DATE
       },
       updatedAt: {
-        field:'update_at',
+        field: 'updated_at',
         allowNull: false,
         type: Sequelize.DATE
       }
+    },{
+      timestamps: true,
+      underscored: true,
+      freezeTableName: true
     });
   },
   async down(queryInterface, Sequelize) {

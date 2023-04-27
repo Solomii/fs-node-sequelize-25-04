@@ -2,9 +2,9 @@ POST  http://localhost:3000/api/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "firstName":"deletpassword",
-  "lastName":"hash",
-  "email":"d123fa@gamil.com",
+  "firstName":"BB",
+  "lastName":"Tash",
+  "email":"bb@gamil.com",
   "password":"419996dafger4",
   "birthday":"1998-01-11",
   "isMale":true
