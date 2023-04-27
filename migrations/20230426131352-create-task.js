@@ -19,6 +19,8 @@ module.exports = {
           },
           key: 'id'
         },
+        onDelete:'cascade',
+        onUpdate:"restrict"
       },
       content: {
         allowNull: false,

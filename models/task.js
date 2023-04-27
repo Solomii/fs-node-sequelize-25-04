@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { isAfter } = require('date-fns');
 module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
     /**
@@ -11,12 +12,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Task.belongsTo(models.User, {
+        foreignKey: 'userId' // 'user_id'
+      })
     }
   }
   Task.init({
     content: {
       allowNull: false,
-      type:DataTypes.TEXT
+      type:DataTypes.TEXT,
+      validate: {
+        notNull:true,
+        notEmpty:true
+      }
     },
     isDone: {
       field:'is_done',
@@ -24,9 +32,18 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       type:DataTypes.BOOLEAN
     },
-    deadline: {
-      type:DataTypes.DATE
-    }
+    deadline:{
+      type: DataTypes.DATE,
+      validate:{
+        isDate:true,
+        isValidDate(value){
+          if(isAfter(new Date(), new Date(value))){
+            throw new Error('check deadline');
+          }
+        }
+      }
+    } 
+    
   }, {
     sequelize,
     modelName: 'Task',
