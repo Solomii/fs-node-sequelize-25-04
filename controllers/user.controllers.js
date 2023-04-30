@@ -1,10 +1,15 @@
+const createError = require("http-errors");
 const { User } = require("../models");
+const { paginate } = require("../middlewares/paginate.mw");
 
 module.exports.createUser = async (req, res, next) => {
     try {
         const { body } = req;
         const newUser = await User.create(body);
         // newUser.password = undefined;
+        if (!newUser) {
+            return next(createError(400, "bad request"));
+        }
         const user = newUser.get();
         delete user.password;
         console.log(newUser);
@@ -17,9 +22,14 @@ module.exports.createUser = async (req, res, next) => {
 
 module.exports.getAllUsers = async (req, res, next) => {
     try {
+        const { pagination = {} } = req;
         const users = await User.findAll({
             attributes: { exclude: ["password", "createdAt", "updateAt"] },
+            ...pagination,
         });
+        if (users.length === 0) {
+            return next(createError(404, "users not found"));
+        }
         res.status(200).send({ data: users });
     } catch (error) {
         console.log("error", error);
