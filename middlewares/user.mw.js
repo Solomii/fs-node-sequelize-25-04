@@ -5,6 +5,7 @@ module.exports.checkUser = async (req, res, next) => {
     try {
         const {
             params: { idUser },
+            idUserForTask
         } = req;
         const user = await User.findByPk(idUser, {
             attributes: { exclude: ["password"] },

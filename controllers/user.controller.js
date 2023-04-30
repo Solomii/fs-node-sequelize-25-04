@@ -1,6 +1,7 @@
 const createError = require("http-errors");
+const { Op } = require('sequelize');
 const { User } = require("../models");
-const { paginate } = require("../middlewares/paginate.mw");
+
 
 module.exports.createUser = async (req, res, next) => {
     try {
@@ -39,11 +40,10 @@ module.exports.getAllUsers = async (req, res, next) => {
 
 module.exports.getUserByPk = async (req, res, next) => {
     try {
-        const {
-            params: { idUser },
-        } = req;
-        const user = await User.findByPk(idUser);
-        res.status(200).send({ data: user });
+        const { userInstance } = req;
+        const countUsersTasks = await userInstance.countTasks();
+        userInstance.dataValues.countTasks = countUsersTasks;
+        res.status(200).send({ data: userInstance });
     } catch (error) {
         console.log(error);
     }
