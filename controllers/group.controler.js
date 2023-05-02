@@ -2,10 +2,14 @@ const _ = require('lodash');
 const createError = require('http-errors');
 const { Group, User } = require('../models');
 
+
+const pickBody = (body) =>
+  _.pick(body, ['title', 'imagePath', 'description', 'isPrivate']);
+
 module.exports.createGroup = async (req, res, next) => {
   try {
     const { body } = req;
-    const values = _.pick(body, ['title', 'imagePath', 'description']);
+    const values = pickBody(body);
     const newGroup = await Group.create(values);
 
     //find user

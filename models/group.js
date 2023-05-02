@@ -29,7 +29,13 @@ module.exports = (sequelize, DataTypes) => {
     imagePath: {
       type:DataTypes.TEXT,
       field: 'image_path',
-    }
+    },
+    isPrivate: {
+      type: DataTypes.BOOLEAN,
+      field: 'is_private',
+      allowNull: false,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Group',
