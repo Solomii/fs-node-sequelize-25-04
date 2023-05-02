@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
             User.hasMany(models.Task, {
                 foreignKey: 'userId' // 'user_id'
             })
-            User.belongsToMany(models.Group,{
-                through:'users_to_groups',
-                foreignKey:'userId'
+            User.belongsToMany(models.Group, {
+                through: 'users_to_groups',
+                foreignKey: 'userId'
             })
         }
     }
@@ -88,6 +88,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             sequelize,
             modelName: 'User',
+            freezeTableName: true,
             tableName:'users',
             underscored:true
         }

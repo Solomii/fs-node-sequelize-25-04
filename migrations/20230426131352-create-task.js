@@ -45,10 +45,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    },{
-      timestamps: true,
-      underscored: true,
-      freezeTableName: true
     });
   },
   async down(queryInterface, Sequelize) {

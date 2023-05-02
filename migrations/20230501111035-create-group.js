@@ -13,20 +13,20 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      desctiption: {
+      description: {
         type: Sequelize.STRING
       },
       imagePath: {
-        field:'image_path',
+        field: 'image_path',
         type: Sequelize.TEXT
       },
       createdAt: {
-        field:'created_at',
+        field: 'created_at',
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        field: 'update_at',
+        field: 'updated_at',
         allowNull: false,
         type: Sequelize.DATE
       }
