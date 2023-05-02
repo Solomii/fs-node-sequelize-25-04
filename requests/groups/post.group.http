@@ -3,5 +3,6 @@ Content-Type: application/json
 
 {
   "title": "userId2 ",
+  "isPrivate":true,
   "userId": 2
 }
