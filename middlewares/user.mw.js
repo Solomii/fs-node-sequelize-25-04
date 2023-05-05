@@ -1,3 +1,4 @@
+const NotFoundError = require("../errors/NotFoundError");
 const { User } = require("../models");
 const createError = require("http-errors");
 
@@ -12,7 +13,7 @@ module.exports.checkUser = async (req, res, next) => {
         });
         if (!user) {
             // throw new Error('user not found')
-            return next(createError(404, "User not found"));
+            return next(new NotFoundError("!!!!user not found!!!"))
         }
         // user.password = undefined;
         req.userInstance = user;
